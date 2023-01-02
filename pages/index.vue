@@ -5,7 +5,7 @@
       <card
         :imgUrl="item.imageLink"
         :cardInfo="item"
-        v-for="item in data"
+        v-for="item in $store.state.allProducts"
         :key="item.id"
       />
     </div>
@@ -17,47 +17,6 @@ import Card from "../components/Card.vue";
 export default {
   components: { Card },
   name: "IndexPage",
-  data() {
-    return {
-      data: [
-        {
-          id: 0,
-          imageLink: "/_nuxt/static/products/product1.jpg",
-          name: "Филадельфия с мандарином",
-          description: "Описание товара",
-          price: 349,
-        },
-        {
-          id: 1,
-          imageLink: "/_nuxt/static/products/product2.jpg",
-          name: "Санта",
-          description: "Описание товара",
-          price: 299,
-        },
-        {
-          id: 2,
-          imageLink: "/_nuxt/static/products/product3.jpg",
-          name: "АББА",
-          description: "Описание товара",
-          price: 449,
-        },
-        {
-          id: 3,
-          imageLink: "/_nuxt/static/products/product4.jpg",
-          name: "Сет жирдяй",
-          description: "Описание товара",
-          price: 299,
-        },
-        {
-          id: 4,
-          imageLink: "/_nuxt/static/products/product5.jpg",
-          name: "Калифорния",
-          description: "Описание товара",
-          price: 399,
-        },
-      ],
-    };
-  },
 };
 </script>
 <style lang="scss" scoped>
@@ -66,10 +25,11 @@ export default {
   height: calc(100% - 70px);
   margin: 0 auto;
   .card-wrapper {
-    width: 100% ;
+    width: 100%;
     height: auto;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
   @media (max-width: 1800px) {
     width: 95%;

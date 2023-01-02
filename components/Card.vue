@@ -1,18 +1,18 @@
 <template>
   <div class="card-item">
-    <img class="card-image" :src="imgUrl" alt="" />
+    <img class="card-image" :src="require(`../static/products/${imgUrl}.jpg`)" alt="" />
     <span>{{ cardInfo.name }}</span>
     <span>{{ cardInfo.description }}</span>
     <div class="interaction">
-      <span v-if="count===0">{{ cardInfo.price }} руб</span>
-      <span v-else>{{ cardInfo.price * count }} руб</span>
-      <button @click="count++" v-if="count === 0" class="add-product">
+      <span v-if="cardInfo.count===0">{{ cardInfo.price }} руб</span>
+      <span v-else>{{ cardInfo.price * cardInfo.count }} руб</span>
+      <button @click="() => this.$store.commit('addCount', this.cardInfo.id)" v-if="cardInfo.count === 0" class="add-product">
         Добавить
       </button>
       <div v-else class="counter-wrapper">
-        <button @click="count--" class="decrement">-</button>
-        <span class="counter-value">{{ count }}</span>
-        <button @click="count++" class="increment">+</button>
+        <button @click="() => this.$store.commit('removeCount', this.cardInfo.id)" class="decrement">-</button>
+        <span class="counter-value">{{ cardInfo.count }}</span>
+        <button @click="() => this.$store.commit('addCount', this.cardInfo.id)" class="increment">+</button>
       </div>
     </div>
   </div>
@@ -20,15 +20,18 @@
 
 <script lang="js">
   export default {
-    data() {
-      return {
-        count: 0
-      }
-    },
     props: {
       cardInfo: Object,
       imgUrl: String
     },
+    watch: {
+      count(value) {
+        this.$store.commit('changeProductList', {
+          ...this.cardInfo,
+          count: this.count
+        })
+      }
+    }
   }
 </script>
 

@@ -1,15 +1,28 @@
 <template>
   <div class="container">
-    Корзина!!!
+      <basket-card
+        :cardInfo="item"
+        :imgUrl="item.imageLink"
+        v-for="item in $store.state.allProducts"
+        :key="item.id"
+      />
   </div>
 </template>
 
 <script>
-  export default {
-    
-  }
+export default {};
 </script>
 
 <style lang="scss" scoped>
-
+.container {
+  width: 1780px;
+  height: calc(100% - 70px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  @media (max-width: 1800px) {
+    width: 95%;
+  }
+}
 </style>
