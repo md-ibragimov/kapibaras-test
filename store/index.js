@@ -1,5 +1,4 @@
 export const state = () => ({
-  products: [],
   allProducts: [{
     id: 0,
     imageLink: "product1",
@@ -59,6 +58,25 @@ export const mutations = {
         count: el.count - 1
       }
       else return el;
+    })
+  },
+  clearBasket(state) {
+    state.allProducts = state.allProducts.map(el => {
+      return {
+        ...el,
+        count: 0
+      }
+    })
+  },
+  deletePosition(state, id) {
+    state.allProducts = state.allProducts.map(el => {
+      if(el.id === id) {
+        return {
+          ...el,
+          count: 0
+        }
+      }
+      return el;
     })
   }
 }

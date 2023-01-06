@@ -1,11 +1,17 @@
 <template>
   <div class="container">
-      <basket-card
-        :cardInfo="item"
-        :imgUrl="item.imageLink"
-        v-for="item in $store.state.allProducts"
-        :key="item.id"
-      />
+    <button
+      @click="() => this.$store.commit('clearBasket')"
+      class="clear-basket"
+    >
+      Очистить корзину
+    </button>
+    <basket-card
+      :cardInfo="item"
+      :imgUrl="item.imageLink"
+      v-for="item in $store.state.allProducts"
+      :key="item.id"
+    />
   </div>
 </template>
 
@@ -21,6 +27,10 @@ export default {};
   display: flex;
   flex-direction: column;
   gap: 15px;
+  .clear-basket {
+    width: max-content;
+    height: auto;
+  }
   @media (max-width: 1800px) {
     width: 95%;
   }
